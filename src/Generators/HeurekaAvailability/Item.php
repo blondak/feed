@@ -1,6 +1,6 @@
 <?php
 
-namespace Mk\Feed\Generators\Heureka;
+namespace Mk\Feed\Generators\HeurekaAvailability;
 
 use Mk, Nette;
 use Mk\Feed\Generators\BaseItem;
@@ -30,6 +30,9 @@ class Item extends BaseItem {
 
     /** @var Image[] */
     protected $images = array();
+
+    /** @var Depot[] */
+    protected $depots = [];
 
     /** @var string|null */
     protected $videoUrl;
@@ -76,6 +79,15 @@ class Item extends BaseItem {
     /** @var Gift[] */
     protected $gifts = array();
 
+    /** @var int */
+    protected $stock;
+
+    /** @var \DateTime */
+    protected $orderDeadline;
+
+    /** @var \DateTime */
+    protected $orderDeliveryTime;
+
     /**
      * @return float
      */
@@ -121,6 +133,12 @@ class Item extends BaseItem {
     public function addImage($url)
     {
         $this->images[] = new Image($url);
+
+        return $this;
+    }
+
+    public function addDepot($id, $stock) {
+        $this->depots[] = new Depot($id, $stock);
 
         return $this;
     }
@@ -470,5 +488,64 @@ class Item extends BaseItem {
 
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getStock(): int {
+        return $this->stock;
+    }
+
+    /**
+     * @param int $stock
+     * @return Item
+     */
+    public function setStock(int $stock): Item {
+        $this->stock = $stock;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getOrderDeadline(): \DateTime {
+        return $this->orderDeadline;
+    }
+
+    /**
+     * @param \DateTime $orderDeadline
+     * @return Item
+     */
+    public function setOrderDeadline(\DateTime $orderDeadline): Item {
+        $this->orderDeadline = $orderDeadline;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getOrderDeliveryTime(): \DateTime {
+        return $this->orderDeliveryTime;
+    }
+
+    /**
+     * @param \DateTime $orderDeliveryTime
+     * @return Item
+     */
+    public function setOrderDeliveryTime(\DateTime $orderDeliveryTime): Item {
+        $this->orderDeliveryTime = $orderDeliveryTime;
+        return $this;
+    }
+
+    /**
+     * @return Depot[]
+     */
+    public function getDepots(): array {
+        return $this->depots;
+    }
+
+
+
+
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mk\Feed\Generators\Zbozi;
+namespace Mk\Feed\Generators\HeurekaAvailability;
 
 use Mk, Nette;
 
@@ -16,8 +16,8 @@ class Delivery{
 
     CONST CESKA_POSTA = 'CESKA_POSTA',
         CESKA_POSTA_NA_POSTU = 'CESKA_POSTA_NA_POSTU',
+        CESKA_POSTA_DOPORUCENA_ZASILKA = 'CESKA_POSTA_DOPORUCENA_ZASILKA',
         CSAD_LOGISTIK_OSTRAVA = 'CSAD_LOGISTIK_OSTRAVA',
-        SLOVENSKA_POSTA = 'SLOVENSKA_POSTA',
         DPD = 'DPD',
         DHL = 'DHL',
         DSV = 'DSV',
@@ -38,12 +38,15 @@ class Delivery{
         UPS = 'UPS',
         ULOZENKA = 'ULOZENKA',
         VLASTNI_PREPRAVA = 'VLASTNI_PREPRAVA',
-        ZASILKOVNA = 'ZASILKOVNA';
+        ZASILKOVNA = 'ZASILKOVNA',
+
+        SLOVENSKA_POSTA = 'SLOVENSKA_POSTA';
 
 
     static $ids = array(
         self::CESKA_POSTA,
         self::CESKA_POSTA_NA_POSTU,
+        self::CESKA_POSTA_DOPORUCENA_ZASILKA,
         self::CSAD_LOGISTIK_OSTRAVA,
         self::DPD,
         self::DHL,
@@ -66,6 +69,7 @@ class Delivery{
         self::ULOZENKA,
         self::VLASTNI_PREPRAVA,
         self::ZASILKOVNA,
+
         self::SLOVENSKA_POSTA,
     );
 
