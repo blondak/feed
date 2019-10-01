@@ -17,6 +17,9 @@ class Gift {
     /** @var string */
     protected $name;
 
+    /** @var int */
+    protected $id;
+
     /**
      * @return string
      */
@@ -25,13 +28,24 @@ class Gift {
         return $this->name;
     }
 
-    /**
-     * Gift constructor.
-     * @param $name
-     */
-    public function __construct($name)
-    {
+	/**
+	 * @return int
+	 */
+	public function getId(): int
+	{
+		return $this->id;
+	}
 
+	/**
+	 * Gift constructor.
+	 * @param $name
+	 * @param null $id
+	 */
+    public function __construct($name, $id = null)
+    {
+		if($id) {
+			$this->id = $id;
+		}
         $this->name = (string)$name;
     }
 

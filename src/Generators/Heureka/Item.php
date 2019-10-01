@@ -159,13 +159,14 @@ class Item extends BaseItem {
         return $this;
     }
 
-    /**
-     * @param $name
-     * @return $this
-     */
-    public function addGift($name)
+	/**
+	 * @param $name
+	 * @param null $id
+	 * @return $this
+	 */
+    public function addGift($name, $id = null)
     {
-        $this->gifts[] = new Gift($name);
+        $this->gifts[] = new Gift($name, $id);
 
         return $this;
     }
