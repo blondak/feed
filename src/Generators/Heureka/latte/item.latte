@@ -47,6 +47,6 @@
 
     <DUES n:if="$item->getDues()">{$item->getDues()}</DUES>
     {if !empty($gifts = $item->getGifts())}
-        <GIFT n:foreach="$gifts as $gift" {if $gift->getId()}>{$gift->getName()}</GIFT>
+        <GIFT n:foreach="$gifts as $gift" {if $gift->getId()}ID="{$gift->getId()}"{/if}>{$gift->getName()}</GIFT>
     {/if}
 </SHOPITEM>
