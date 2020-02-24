@@ -28,7 +28,7 @@
     <CATEGORYTEXT n:if="$item->getCategoryText()"><![CDATA[{$item->getCategoryText()}]]></CATEGORYTEXT>
     <EAN n:if="$item->getEan()">{$item->getEan()}</EAN>
     <ISBN n:if="$item->getIsbn()">{$item->getIsbn()}</ISBN>
-    <HEUREKA_CPC n:if="isset($item->heurekaCpc) && $item->getHeurekaCpc()>0">{$item->getHeurekaCpc()}</HEUREKA_CPC>
+    <HEUREKA_CPC n:if="isset($item->heurekaCpc)">{$item->getHeurekaCpc()}</HEUREKA_CPC>
     <DELIVERY_DATE>{$item->getDeliveryDate()}</DELIVERY_DATE>
 
     {if !empty($deliveries = $item->getDeliveries())}
