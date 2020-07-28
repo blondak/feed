@@ -36,6 +36,8 @@
         <EXTRA_MESSAGE n:foreach="$extraMessages as $extraMessage">{$extraMessage->getType()}</EXTRA_MESSAGE>
     {/if}
 
+    <FREE_GIFT_TEXT n:if="$item->getFreeGiftText()">{$item->getFreeGiftText()}</FREE_GIFT_TEXT>
+
     {if !empty($shopDepots = $item->getShopDepots())}
         <SHOP_DEPOTS n:foreach="$shopDepots as $shopDepot">{$shopDepot->getId()}</SHOP_DEPOTS>
     {/if}

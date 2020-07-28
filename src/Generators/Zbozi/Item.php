@@ -76,6 +76,8 @@ class Item extends BaseItem {
     protected $maxCpcSearch;
     /** @var Parameter[] */
     protected $parameters = array();
+    /** @var string|null */
+    protected $freeGiftText;
 
     #product database
     /** @var string|null */
@@ -640,6 +642,25 @@ class Item extends BaseItem {
         return $this->deliveries;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getFreeGiftText(): ?string
+    {
+        return $this->freeGiftText;
+    }
+
+    /**
+     * @param string|null $freeGiftText
+     *
+     * @return Item
+     */
+    public function setFreeGiftText(?string $freeGiftText): Item
+    {
+        $this->freeGiftText = $freeGiftText;
+
+        return $this;
+    }
 
 
 
