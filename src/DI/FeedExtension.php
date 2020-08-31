@@ -25,19 +25,19 @@ class FeedExtension extends Nette\DI\CompilerExtension {
         $config = $this->getConfig($this->defaults);
 
         $builder->addDefinition($this->prefix('storage'))
-            ->setClass('\Mk\Feed\Storage', array($config['exportsDir']));
+            ->setFactory('\Mk\Feed\Storage', array($config['exportsDir']));
 
         foreach ($config['exports'] as $export => $class) {
             if (!class_exists($class)) {
             }
             $builder->addDefinition($this->prefix($export))
-                ->setClass($class);
+                ->setFactory($class);
 
         }
 
         if (class_exists('\Symfony\Component\Console\Command\Command')) {
             $builder->addDefinition($this->prefix('command'))
-                ->setClass('Mk\Feed\Command\FeedCommand', array($config))
+                ->setFactory('Mk\Feed\Command\FeedCommand', array($config))
                 ->addTag('kdyby.console.command');
         }
     }
