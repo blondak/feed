@@ -2,36 +2,35 @@
 
 namespace Mk\Feed\Generators\Google;
 
-use Mk, Nette;
 use Mk\Feed\Generators\BaseItem;
 
 /**
- * Class Item
+ * Class Item.
+ *
  * @property string $id
+ *
  * @author Martin Knor <martin.knor@gmail.com>
- * @package Mk\Feed\Generators\Google
  */
-class Item extends BaseItem {
+class Item extends BaseItem
+{
+    const CONDITION_NEW = 'new';
+    const CONDITION_REFURBISHED = 'refurbished';
+    const CONDITION_USED = 'used';
+    const AVAILABILITY_PREORDER = 'preorder';
+    const AVAILABILITY_IN_STOCK = 'in stock';
+    const AVAILABILITY_OUT_OF_STOCK = 'out of stock';
 
-    CONST CONDITION_NEW = 'new',
-        CONDITION_REFURBISHED = 'refurbished',
-        CONDITION_USED = 'used',
-        
-        AVAILABILITY_PREORDER = 'preorder',
-        AVAILABILITY_IN_STOCK = 'in stock',
-        AVAILABILITY_OUT_OF_STOCK = 'out of stock';
-
-    static $conditions = array(
+    public static $conditions = [
         self::CONDITION_NEW,
         self::CONDITION_REFURBISHED,
         self::CONDITION_USED,
-    );
+    ];
 
-    static $availabilities = array(
+    public static $availabilities = [
         self::AVAILABILITY_PREORDER,
         self::AVAILABILITY_IN_STOCK,
         self::AVAILABILITY_OUT_OF_STOCK,
-    );
+    ];
 
     /** @var string @required */
     protected $id;
@@ -46,16 +45,16 @@ class Item extends BaseItem {
     protected $googleProductCategory;
 
     /** @var ProductType[] */
-    protected $productTypes = array();
+    protected $productTypes = [];
 
-    /**  @var string @required */
+    /** @var string @required */
     protected $link;
 
-    /**  @var string|null */
+    /** @var string|null */
     protected $mobileLink;
 
     /** @var Image[] */
-    protected $images = array();
+    protected $images = [];
 
     /** @var string|null */
     protected $condition = self::CONDITION_NEW;
@@ -65,22 +64,22 @@ class Item extends BaseItem {
 
     /** @var \DateTime|null */
     protected $availabilityDate;
-    
+
     /** @var string @required */
     protected $price;
-    
+
     /** @var string */
     protected $salePrice;
-    
+
     /** @var string */
     protected $salePriceEffectiveDate;
-    
+
     /** @var int */
     protected $gtin;
-    
+
     /** @var string */
     protected $mpn;
-    
+
     /** @var string */
     protected $brand;
 
@@ -93,7 +92,22 @@ class Item extends BaseItem {
     protected $itemGroupId;
 
     /** @var array */
-    protected $params;
+    protected $params = [];
+
+    /** @var string|null */
+    protected $shipping;
+
+    public function getShipping(): ?string
+    {
+        return $this->shipping;
+    }
+
+    public function setShipping(?string $shipping): Item
+    {
+        $this->shipping = $shipping;
+
+        return $this;
+    }
 
     /**
      * @return string
@@ -105,6 +119,7 @@ class Item extends BaseItem {
 
     /**
      * @param string $id
+     *
      * @return Item
      */
     public function setId($id)
@@ -124,6 +139,7 @@ class Item extends BaseItem {
 
     /**
      * @param string $title
+     *
      * @return Item
      */
     public function setTitle($title)
@@ -143,6 +159,7 @@ class Item extends BaseItem {
 
     /**
      * @param string $description
+     *
      * @return Item
      */
     public function setDescription($description)
@@ -153,7 +170,7 @@ class Item extends BaseItem {
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getGoogleProductCategory()
     {
@@ -161,7 +178,8 @@ class Item extends BaseItem {
     }
 
     /**
-     * @param null|string $googleProductCategory
+     * @param string|null $googleProductCategory
+     *
      * @return Item
      */
     public function setGoogleProductCategory($googleProductCategory)
@@ -181,6 +199,7 @@ class Item extends BaseItem {
 
     /**
      * @param string $link
+     *
      * @return Item
      */
     public function setLink($link)
@@ -191,7 +210,7 @@ class Item extends BaseItem {
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getMobileLink()
     {
@@ -199,7 +218,8 @@ class Item extends BaseItem {
     }
 
     /**
-     * @param null|string $mobileLink
+     * @param string|null $mobileLink
+     *
      * @return Item
      */
     public function setMobileLink($mobileLink)
@@ -219,6 +239,7 @@ class Item extends BaseItem {
 
     /**
      * @param string $price
+     *
      * @return Item
      */
     public function setPrice($price)
@@ -238,6 +259,7 @@ class Item extends BaseItem {
 
     /**
      * @param string $salePrice
+     *
      * @return Item
      */
     public function setSalePrice($salePrice)
@@ -257,6 +279,7 @@ class Item extends BaseItem {
 
     /**
      * @param string $salePriceEffectiveDate
+     *
      * @return Item
      */
     public function setSalePriceEffectiveDate($salePriceEffectiveDate)
@@ -276,6 +299,7 @@ class Item extends BaseItem {
 
     /**
      * @param int $gtin
+     *
      * @return Item
      */
     public function setGtin($gtin)
@@ -295,6 +319,7 @@ class Item extends BaseItem {
 
     /**
      * @param string $mpn
+     *
      * @return Item
      */
     public function setMpn($mpn)
@@ -314,6 +339,7 @@ class Item extends BaseItem {
 
     /**
      * @param string $brand
+     *
      * @return Item
      */
     public function setBrand($brand)
@@ -324,15 +350,16 @@ class Item extends BaseItem {
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIdentifierExists()
     {
         return $this->identifierExists;
     }
-    
+
     /**
-     * @param boolean $identifierExists
+     * @param bool $identifierExists
+     *
      * @return Item
      */
     public function setIdentifierExists($identifierExists)
@@ -351,7 +378,6 @@ class Item extends BaseItem {
     }
 
     /**
-     * @param \DateTime|null $availabilityDate
      * @return Item
      */
     public function setAvailabilityDate(\DateTime $availabilityDate = null)
@@ -371,6 +397,7 @@ class Item extends BaseItem {
 
     /**
      * @param float $availability
+     *
      * @return Item
      */
     public function setAvailability($availability)
@@ -385,6 +412,7 @@ class Item extends BaseItem {
 
     /**
      * @param $url
+     *
      * @return $this
      */
     public function addImage($url)
@@ -410,7 +438,7 @@ class Item extends BaseItem {
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getCondition()
     {
@@ -418,7 +446,8 @@ class Item extends BaseItem {
     }
 
     /**
-     * @param null|string $condition
+     * @param string|null $condition
+     *
      * @return Item
      */
     public function setCondition($condition)
@@ -431,62 +460,52 @@ class Item extends BaseItem {
         return $this;
     }
 
-	/**
-	 * @return Image[]
-	 */
-	public function getImages()
-	{
-		return $this->images;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getLabels()
-	{
-		return $this->labels;
-	}
-
-	public function addLabel($label)
-	{
-		$this->labels[] = $label;
-	}
-
-	public function setLabels(array $labels)
-	{
-		$this->labels = $labels;
-	}
-
     /**
-     * @return string
+     * @return Image[]
      */
-    public function getItemGroupId(): ?string {
-        return $this->itemGroupId;
-    }
-
-    /**
-     * @param string $itemGroupId
-     */
-    public function setItemGroupId(string $itemGroupId): void {
-        $this->itemGroupId = $itemGroupId;
-    }
-
-    public function addParam($name, $value){
-        $this->params[$name] = $value;
+    public function getImages()
+    {
+        return $this->images;
     }
 
     /**
      * @return array
      */
-    public function getParams(): array {
-        return $this->params;
+    public function getLabels()
+    {
+        return $this->labels;
     }
 
+    public function addLabel($label)
+    {
+        $this->labels[] = $label;
+    }
 
+    public function setLabels(array $labels)
+    {
+        $this->labels = $labels;
+    }
 
+    /**
+     * @return string
+     */
+    public function getItemGroupId(): ?string
+    {
+        return $this->itemGroupId;
+    }
 
+    public function setItemGroupId(string $itemGroupId): void
+    {
+        $this->itemGroupId = $itemGroupId;
+    }
 
+    public function addParam($name, $value)
+    {
+        $this->params[$name] = $value;
+    }
 
-
-
+    public function getParams(): ?array
+    {
+        return $this->params;
+    }
 }
