@@ -431,6 +431,14 @@ class Item extends BaseItem {
     }
 
     /**
+     * @param string|null $itemType
+     */
+    public function setItemType($itemType)
+    {
+        $this->itemType = $itemType;
+    }
+
+    /**
      * @return boolean
      */
     public function isVisibility()
