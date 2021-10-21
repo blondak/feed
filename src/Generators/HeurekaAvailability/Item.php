@@ -137,8 +137,8 @@ class Item extends BaseItem {
         return $this;
     }
 
-    public function addDepot($id, $stock) {
-        $this->depots[] = new Depot($id, $stock);
+    public function addDepot($id, $stock, $orderDeadline, $orderDeliveryTime) {
+        $this->depots[] = new Depot($id, $stock, $orderDeadline, $orderDeliveryTime);
 
         return $this;
     }
@@ -508,7 +508,7 @@ class Item extends BaseItem {
     /**
      * @return \DateTime
      */
-    public function getOrderDeadline(): \DateTime {
+    public function getOrderDeadline(): ?\DateTime {
         return $this->orderDeadline;
     }
 
@@ -524,7 +524,7 @@ class Item extends BaseItem {
     /**
      * @return \DateTime
      */
-    public function getOrderDeliveryTime(): \DateTime {
+    public function getOrderDeliveryTime(): ?\DateTime {
         return $this->orderDeliveryTime;
     }
 

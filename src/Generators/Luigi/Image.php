@@ -1,6 +1,6 @@
 <?php
 
-namespace Mk\Feed\Generators\Google;
+namespace Mk\Feed\Generators\Luigi;
 
 
 use Mk, Nette;

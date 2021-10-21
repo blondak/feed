@@ -5,7 +5,6 @@ namespace Mk\Feed\Generators\Zbozi;
 
 use Nette\Caching\Cache;
 use Nette\Caching\IStorage;
-use Sergiors\Importing\Loader\Excel5FileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderResolver;

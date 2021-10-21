@@ -7,6 +7,8 @@ use Mk\Feed\Generators\BaseItem;
 
 /**
  * Class Item
+ * @property itemId
+ * @property heurekaCpc
  * @author Martin Knor <martin.knor@gmail.com>
  * @package Mk\Feed\Generators\Heureka
  * @see http://sluzby.heureka.cz/napoveda/xml-feed/ Documentation

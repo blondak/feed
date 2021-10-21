@@ -1,6 +1,6 @@
 {contentType xml}
 <SHOPITEM>
-    <ITEM_ID n:ifset="$item->itemId">{$item->getItemId()}</ITEM_ID>
+    <ITEM_ID n:if="$item->getItemId()">{$item->getItemId()}</ITEM_ID>
     <PRODUCTNAME><![CDATA[{$item->getProductName()}]]></PRODUCTNAME>
     <PRODUCT n:if="$item->getProduct()"><![CDATA[{$item->getProduct()}]]></PRODUCT>
     <DESCRIPTION><![CDATA[{$item->getDescription()|striptags|noescape}]]></DESCRIPTION>
@@ -28,7 +28,7 @@
     <CATEGORYTEXT n:if="$item->getCategoryText()"><![CDATA[{$item->getCategoryText()}]]></CATEGORYTEXT>
     <EAN n:if="$item->getEan()">{$item->getEan()}</EAN>
     <ISBN n:if="$item->getIsbn()">{$item->getIsbn()}</ISBN>
-    <HEUREKA_CPC n:if="isset($item->heurekaCpc)">{$item->getHeurekaCpc()}</HEUREKA_CPC>
+    <HEUREKA_CPC n:if="isset($item->heurekaCpc) && $item->getHeurekaCpc()>0">{$item->getHeurekaCpc()}</HEUREKA_CPC>
     <DELIVERY_DATE>{$item->getDeliveryDate()}</DELIVERY_DATE>
 
     {if !empty($deliveries = $item->getDeliveries())}
@@ -49,4 +49,12 @@
     {if !empty($gifts = $item->getGifts())}
         <GIFT n:foreach="$gifts as $gift" {if $gift->getId()}ID="{$gift->getId()}"{/if}>{$gift->getName()}</GIFT>
     {/if}
+
+    <CUSTOM_LABEL n:if="$item->getCustomLabel()">{$item->getCustomLabel()}</CUSTOM_LABEL>
+
+    <SPECIAL_SERVICE n:foreach="$item->getSpecialServices() as $service">{$service}</SPECIAL_SERVICE>
+    <EXTENDED_WARRANTY n:if="$item->getExtendedWarranty()">
+        <VAL>{$item->getExtendedWarranty()}</VAL>
+        <DESC>Záruka {$item->getExtendedWarranty()} měsíců</DESC>
+    </EXTENDED_WARRANTY>
 </SHOPITEM>

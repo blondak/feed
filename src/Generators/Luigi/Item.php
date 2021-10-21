@@ -1,15 +1,13 @@
 <?php
 
-namespace Mk\Feed\Generators\Google;
+namespace Mk\Feed\Generators\Luigi;
 
 use Mk, Nette;
 use Mk\Feed\Generators\BaseItem;
 
 /**
- * Class Item.
- *
+ * Class Item
  * @property string $id
- *
  * @property  $title
  * @property  $description
  * @property  $link
@@ -23,33 +21,36 @@ use Mk\Feed\Generators\BaseItem;
  * @property  $gtin
  * @property  $brand
  * @property  $labels
+ * @property  $productLabels
  * @property  $mpn
  * @property  $productTypes
  * @property  $googleProductCategory
  * @property  $itemGroupId
  * @property  $features
  * @author Martin Knor <martin.knor@gmail.com>
+ * @package Mk\Feed\Generators\Google
  */
 class Item extends BaseItem {
 
-    const CONDITION_NEW = 'new';
-    const CONDITION_REFURBISHED = 'refurbished';
-    const CONDITION_USED = 'used';
-    const AVAILABILITY_PREORDER = 'preorder';
-    const AVAILABILITY_IN_STOCK = 'in stock';
-    const AVAILABILITY_OUT_OF_STOCK = 'out of stock';
+    CONST CONDITION_NEW = 'new',
+        CONDITION_REFURBISHED = 'refurbished',
+        CONDITION_USED = 'used',
+        
+        AVAILABILITY_PREORDER = 'preorder',
+        AVAILABILITY_IN_STOCK = 'in stock',
+        AVAILABILITY_OUT_OF_STOCK = 'out of stock';
 
-    static $conditions = [
+    static $conditions = array(
         self::CONDITION_NEW,
         self::CONDITION_REFURBISHED,
         self::CONDITION_USED,
-    ];
+    );
 
-    public static $availabilities = [
+    static $availabilities = array(
         self::AVAILABILITY_PREORDER,
         self::AVAILABILITY_IN_STOCK,
         self::AVAILABILITY_OUT_OF_STOCK,
-    ];
+    );
 
     /** @var string @required */
     protected $id;
@@ -64,16 +65,19 @@ class Item extends BaseItem {
     protected $googleProductCategory;
 
     /** @var ProductType[] */
-    protected $productTypes = [];
+    protected $productTypes = array();
 
-    /** @var string @required */
+    /**  @var string @required */
     protected $link;
 
-    /** @var string|null */
+    /**  @var string|null */
     protected $mobileLink;
 
     /** @var Image[] */
-    protected $images = [];
+    protected $images = array();
+
+    /** @var Image[] */
+    protected $thumbnails = array();
 
     /** @var string|null */
     protected $condition = self::CONDITION_NEW;
@@ -83,22 +87,22 @@ class Item extends BaseItem {
 
     /** @var \DateTime|null */
     protected $availabilityDate;
-
+    
     /** @var string @required */
     protected $price;
-
+    
     /** @var string */
     protected $salePrice;
-
+    
     /** @var string */
     protected $salePriceEffectiveDate;
-
+    
     /** @var int */
     protected $gtin;
-
+    
     /** @var string */
     protected $mpn;
-
+    
     /** @var string */
     protected $brand;
 
@@ -107,28 +111,13 @@ class Item extends BaseItem {
 
     protected $labels = [];
 
-    protected $ownLabels = [];
+    protected $productLabels = [];
 
     /** @var string */
     protected $itemGroupId;
 
     /** @var array */
-    protected $params = [];
-
-    /** @var string|null */
-    protected $shipping;
-
-    public function getShipping(): ?string
-    {
-        return $this->shipping;
-    }
-
-    public function setShipping(?string $shipping): Item
-    {
-        $this->shipping = $shipping;
-
-        return $this;
-    }
+    protected $params;
 
     /** @var string */
     protected $currency;
@@ -138,6 +127,12 @@ class Item extends BaseItem {
 
     /** @var array */
     protected $parts;
+
+    /** @var array */
+    protected $prices;
+
+    /** @var array */
+    protected $salePrices;
 
     /**
      * @return string
@@ -197,7 +192,7 @@ class Item extends BaseItem {
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getGoogleProductCategory()
     {
@@ -205,8 +200,7 @@ class Item extends BaseItem {
     }
 
     /**
-     * @param string|null $googleProductCategory
-     *
+     * @param null|string $googleProductCategory
      * @return Item
      */
     public function setGoogleProductCategory($googleProductCategory)
@@ -236,7 +230,7 @@ class Item extends BaseItem {
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getMobileLink()
     {
@@ -244,8 +238,7 @@ class Item extends BaseItem {
     }
 
     /**
-     * @param string|null $mobileLink
-     *
+     * @param null|string $mobileLink
      * @return Item
      */
     public function setMobileLink($mobileLink)
@@ -370,16 +363,15 @@ class Item extends BaseItem {
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isIdentifierExists()
     {
         return $this->identifierExists;
     }
-
+    
     /**
-     * @param bool $identifierExists
-     *
+     * @param boolean $identifierExists
      * @return Item
      */
     public function setIdentifierExists($identifierExists)
@@ -398,6 +390,7 @@ class Item extends BaseItem {
     }
 
     /**
+     * @param \DateTime|null $availabilityDate
      * @return Item
      */
     public function setAvailabilityDate(\DateTime $availabilityDate = null)
@@ -440,6 +433,17 @@ class Item extends BaseItem {
         return $this;
     }
 
+    /**
+     * @param $url
+     * @return $this
+     */
+    public function addThumbnail($url)
+    {
+        $this->thumbnails[] = new Image($url);
+
+        return $this;
+    }
+
     public function addProductType($text)
     {
         $this->productTypes[] = new ProductType($text);
@@ -456,7 +460,7 @@ class Item extends BaseItem {
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getCondition()
     {
@@ -464,8 +468,7 @@ class Item extends BaseItem {
     }
 
     /**
-     * @param string|null $condition
-     *
+     * @param null|string $condition
      * @return Item
      */
     public function setCondition($condition)
@@ -478,52 +481,63 @@ class Item extends BaseItem {
         return $this;
     }
 
+	/**
+	 * @return Image[]
+	 */
+	public function getImages()
+	{
+		return $this->images;
+	}
+
+
     /**
      * @return Image[]
      */
-    public function getImages()
+    public function getThumbnails()
     {
-        return $this->images;
+        return $this->thumbnails;
+    }
+
+	/**
+	 * @return array
+	 */
+	public function getLabels()
+	{
+		return $this->labels;
+	}
+
+	public function addLabel($label)
+	{
+		$this->labels[] = $label;
+	}
+
+	public function setLabels(array $labels)
+	{
+		$this->labels = $labels;
+	}
+
+    /**
+     * @return string
+     */
+    public function getItemGroupId(): ?string {
+        return $this->itemGroupId;
+    }
+
+    /**
+     * @param string $itemGroupId
+     */
+    public function setItemGroupId(string $itemGroupId): void {
+        $this->itemGroupId = $itemGroupId;
+    }
+
+    public function addParam($name, $value){
+        $this->params[$name] = $value;
     }
 
     /**
      * @return array
      */
-    public function getLabels()
-    {
-        return $this->labels;
-    }
-
-    public function addLabel($label)
-    {
-        $this->labels[] = $label;
-    }
-
-    public function setLabels(array $labels)
-    {
-        $this->labels = $labels;
-    }
-
-    /**
-     * @return string
-     */
-    public function getItemGroupId(): ?string
-    {
-        return $this->itemGroupId;
-    }
-
-    public function setItemGroupId(string $itemGroupId): void
-    {
-        $this->itemGroupId = $itemGroupId;
-    }
-
-    public function addParam($name, $value)
-    {
-        $this->params[$name] = $value;
-    }
-
-    public function getParams(): ?array
-    {
+    public function getParams(): array {
         return $this->params;
     }
 
@@ -590,24 +604,50 @@ class Item extends BaseItem {
     /**
      * @return array
      */
-    public function getOwnLabels(): array {
-        return $this->ownLabels;
+    public function getPrices(): array {
+        return (array)$this->prices;
+    }
+
+    public function addPrice( string $currencyCode, float $price ) {
+        $this->prices[$currencyCode] = $price;
     }
 
     /**
-     * @param array $ownLabels
+     * @return array
      */
-    public function setOwnLabels( array $ownLabels ): void {
-        $this->ownLabels = $ownLabels;
+    public function getSalePrices(): array {
+        return (array)$this->salePrices;
+    }
+
+    /**
+     * @param array $salePrices
+     */
+    public function setSalePrices( array $salePrices ): void {
+        $this->salePrices = $salePrices;
     }
 
 
 
-    public function addOwnLabel($label)
-    {
-        $this->ownLabels[] = $label;
+    public function addSalePrice( string $currencyCode, float $price ) {
+        $this->salePrices[$currencyCode] = $price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductLabels() {
+        return $this->productLabels;
+    }
+
+    /**
+     * @param mixed $productLabels
+     */
+    public function setProductLabels( $productLabels ): void {
+        $this->productLabels = $productLabels;
     }
 
 
-
+    public function addProductLabel( string $label ) {
+        $this->productLabels[] = $label;
+    }
 }

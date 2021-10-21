@@ -1,6 +1,6 @@
 <?php
 
-namespace Mk\Feed\Generators\Heureka;
+namespace Mk\Feed\Generators\Shoptet;
 
 use Mk, Nette;
 use Mk\Feed\Generators\BaseItem;
@@ -19,17 +19,35 @@ class Item extends BaseItem {
     /** @var string @required */
     protected $productName;
 
+    /** @var string @required */
+    protected $name;
+
+    /** @var string @required */
+    protected $nameExt;
+
+    /** @var string @required */
+    protected $code;
+
     /** @var string|null */
     protected $product;
 
     /** @var string @required */
     protected $description;
 
+    /** @var string @required */
+    protected $shortDescription;
+
+    /** @var string @required */
+    protected $warranty;
+
     /**  @var string @required */
     protected $url;
 
     /** @var Image[] */
     protected $images = array();
+
+    /** @var string[] */
+    protected $categories = array();
 
     /** @var string|null */
     protected $videoUrl;
@@ -67,9 +85,6 @@ class Item extends BaseItem {
     /** @var string|null */
     protected $itemGroupId;
 
-    /** @var string|null */
-    protected $customLabel;
-
     /** @var array */
     protected $accessories = array();
 
@@ -79,11 +94,18 @@ class Item extends BaseItem {
     /** @var Gift[] */
     protected $gifts = array();
 
-    /** @var string[] */
-    protected $specialServices = array();
+    /** @var string */
+    protected $availability;
 
-    /** @var int */
-    protected $extendedWarranty;
+    /** @var string */
+    protected $vat;
+
+    /** @var float */
+    protected $weight;
+
+    /** @var Variant[] */
+    protected $variants = [];
+
 
     /**
      * @return float
@@ -168,14 +190,13 @@ class Item extends BaseItem {
         return $this;
     }
 
-	/**
-	 * @param $name
-	 * @param null $id
-	 * @return $this
-	 */
-    public function addGift($name, $id = null)
+    /**
+     * @param $name
+     * @return $this
+     */
+    public function addGift($name)
     {
-        $this->gifts[] = new Gift($name, $id);
+        $this->gifts[] = new Gift($name);
 
         return $this;
     }
@@ -482,55 +503,173 @@ class Item extends BaseItem {
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getCustomLabel(): ?string {
-        return $this->customLabel;
+    public function getShortDescription(): ?string {
+        return $this->shortDescription;
     }
 
     /**
-     * @param string|null $customLabel
+     * @param string $shortDescription
      * @return Item
      */
-    public function setCustomLabel( ?string $customLabel ): Item {
-        $this->customLabel = $customLabel;
+    public function setShortDescription(?string $shortDescription): Item {
+        $this->shortDescription = $shortDescription;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWarranty(): ?string {
+        return $this->warranty;
+    }
+
+    /**
+     * @param string $warranty
+     * @return Item
+     */
+    public function setWarranty(?string $warranty): Item {
+        $this->warranty = $warranty;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode(): ?string {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     * @return Item
+     */
+    public function setCode(?string $code): Item {
+        $this->code = $code;
+        return $this;
+    }
+
+    public function addCategory(string $category) {
+        $this->categories[] = $category;
     }
 
     /**
      * @return string[]
      */
-    public function getSpecialServices(): array {
-        return (array)$this->specialServices;
+    public function getCategories(): array {
+        return $this->categories;
     }
 
     /**
-     * @param string[] $specialServices
+     * @return string
      */
-    public function setSpecialServices( array $specialServices ): void {
-        $this->specialServices = $specialServices;
-    }
-
-
-    public function addService( string $service ) {
-        if (count($this->specialServices) < 5){
-            $this->specialServices[] = $service;
-        }
+    public function getAvailability(): ?string {
+        return $this->availability;
     }
 
     /**
-     * @return int
+     * @param string $availability
+     * @return Item
      */
-    public function getExtendedWarranty(): ?int {
-        return $this->extendedWarranty;
+    public function setAvailability(?string $availability): Item {
+        $this->availability = $availability;
+        return $this;
     }
 
     /**
-     * @param int $extendedWarranty
+     * @return string
      */
-    public function setExtendedWarranty( int $extendedWarranty ): void {
-        $this->extendedWarranty = $extendedWarranty;
+    public function getVat(): ?string {
+        return $this->vat;
     }
+
+    /**
+     * @param string $vat
+     * @return Item
+     */
+    public function setVat(?string $vat): Item {
+        $this->vat = $vat;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWeight(): ?string {
+        return $this->weight;
+    }
+
+    /**
+     * @param float $weight
+     * @return Item
+     */
+    public function setWeight(?float $weight): Item {
+        $this->weight = $weight;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSku(): ?string {
+        return $this->sku;
+    }
+
+    /**
+     * @param string $sku
+     * @return Item
+     */
+    public function setSku(?string $sku): Item {
+        $this->sku = $sku;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): ?string {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return Item
+     */
+    public function setName(?string $name): Item {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNameExt(): ?string {
+        return $this->nameExt;
+    }
+
+    /**
+     * @param string $nameExt
+     * @return Item
+     */
+    public function setNameExt(?string $nameExt): Item {
+        $this->nameExt = $nameExt;
+        return $this;
+    }
+
+    /**
+     * @return Variant[]
+     */
+    public function getVariants(): array {
+        return $this->variants;
+    }
+
+    public function addVariant(Variant $variant) {
+        $this->variants[] = $variant;
+    }
+
+
+
 
 
 }

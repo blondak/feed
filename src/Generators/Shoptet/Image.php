@@ -1,15 +1,14 @@
 <?php
 
-namespace Mk\Feed\Generators\Google;
+namespace Mk\Feed\Generators\Shoptet;
 
 
 use Mk, Nette;
 
 /**
- * @property $url
  * Class Image
  * @author Martin Knor <martin.knor@gmail.com>
- * @package Mk\Feed\Generators\Google
+ * @package Mk\Feed\Generators\Heureka
  */
 class Image
 {

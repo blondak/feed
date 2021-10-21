@@ -1,5 +1,3 @@
-{varType Mk\Feed\Generators\Google\Item $item}
-
 {contentType xml}
 <item>
     <g:id>{$item->getId()}</g:id>
@@ -9,8 +7,14 @@
 
     {if !empty($images = $item->getImages())}
         {foreach $images as $image}
-            {varType Mk\Feed\Generators\Google\Image $image}
-            {var $tag = $iterator->first ? 'g:image_link' : 'g:additional_image_link'}
+            {var tag = $iterator->first ? 'g:image_link' : 'g:additional_image_link'}
+            <{$tag}><![CDATA[{$image->getUrl()}]]></{$tag}>
+        {/foreach}
+    {/if}
+
+    {if !empty($images = $item->getThumbnails())}
+        {foreach $images as $image}
+            {var tag = $iterator->first ? 'g:image_link_thumb' : 'g:additional_image_link_thumb'}
             <{$tag}><![CDATA[{$image->getUrl()}]]></{$tag}>
         {/foreach}
     {/if}
@@ -31,9 +35,11 @@
     <g:age_group>Adult</g:age_group>
     <g:color>Navy</g:color>
     <g:size>8 Standard</g:size>*}
-    <g:shipping n:if="$item->getShipping()">{$item->getShipping()}</g:shipping>
     <g:mpn>{if $item->getMpn()}{$item->getMpn()}{/if}</g:mpn>
 
+    <g:product_labels n:if="count($item->getProductLabels())" n:inner-foreach="$item->getProductLabels() as $productLabel">
+        <g:label>{$productLabel}</g:label>
+    </g:product_labels>
     {if !empty($productTypes = $item->getProductTypes())}
         <g:product_type n:foreach="$productTypes as $productType" n:if="!empty($productType->getText())">{$productType->getText()}</g:product_type>
     {/if}
@@ -41,8 +47,6 @@
     <g:google_product_category n:if="$item->getGoogleProductCategory()">{$item->getGoogleProductCategory()}</g:google_product_category>
 
 
-    {if !empty($productTypes = $item->getProductTypes())}
-        <g:product_type n:foreach="$productTypes as $productType" n:if="!empty($productType->getText())">{$productType->getText()}</g:product_type>
     <g:item_group_id n:if="$item->getItemGroupId()">{$item->getItemGroupId()}</g:item_group_id>
 
     {if !empty($features = $item->getFeatures())}
@@ -59,8 +63,14 @@
             <g:part>{trim($part)}</g:part>
         </g:parts>
     {/if}
-    {if !empty($ownLabels = $item->getOwnLabels())}
-        <g:own_label n:foreach="$ownLabels as $ownLabel">{$ownLabel}</g:own_label>
-    {/if}
-    <g:{$name|lower} n:foreach="$item->params as $name => $value" n:if="(!empty($item->params))">{$value}</g:{$name|lower}>
+
+
+    <g:prices n:if="count($prices = $item->getPrices())">
+        <g:price n:foreach="$prices as $curr => $price" currency="{$curr}">{$price}</g:price>
+    </g:prices>
+
+    <g:sale_prices n:if="count($salePrices = $item->getSalePrices())">
+        <g:price n:foreach="$salePrices as $curr => $price" currency="{$curr}">{$price}</g:price>
+    </g:sale_prices>
+    {*<g:{$name|lower} n:foreach="$item->params as $name => $value" n:if="(!empty($item->params))">{$value}</g:{$name|lower}>*}
 </item>
