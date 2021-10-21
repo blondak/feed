@@ -1,3 +1,5 @@
+{varType Mk\Feed\Generators\Zbozi\Item $item}
+
 {contentType xml}
 <SHOPITEM>
     <PRODUCTNAME>{$item->getProductName()}</PRODUCTNAME>
@@ -55,6 +57,9 @@
             <UNIT n:if="!empty($parameter->getUnit())">{$parameter->getUnit()}</UNIT>
         </PARAM>
     {/if}
+
+    <CONDITION n:if="$item->getItemType()!=='new'">{$item->getItemType()}</CONDITION>
+    <CONDITION_DESC n:if="$item->getItemTypeDesc()">{$item->getItemTypeDesc()}</CONDITION_DESC>
 
     <PRODUCT_LINE n:if="$item->getProductLine()">{$item->getProductLine()}</PRODUCT_LINE>
     <LIST_PRICE n:if="$item->getListPrice()">{$item->getListPrice()}</LIST_PRICE>

@@ -60,6 +60,8 @@ class Item extends BaseItem {
     protected $product;
     /** @var string|null */
     protected $itemType = 'new';
+    /** @var string|null */
+    protected $itemTypeDesc;
     /** @var ExtraMessage[] */
     protected $extraMessages;
     /** @var ShopDepot[] */
@@ -436,6 +438,22 @@ class Item extends BaseItem {
     public function setItemType($itemType)
     {
         $this->itemType = $itemType;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getItemTypeDesc()
+    {
+        return $this->itemTypeDesc;
+    }
+
+    /**
+     * @param string|null $itemTypeDesc
+     */
+    public function setItemTypeDesc($itemTypeDesc)
+    {
+        $this->itemTypeDesc = $itemTypeDesc;
     }
 
     /**
