@@ -25,6 +25,9 @@ class Item extends BaseItem {
     /** @var string @required */
     protected $description;
 
+    /** @var string @required */
+    protected $longDescription;
+
     /**  @var string @required */
     protected $url;
 
@@ -236,6 +239,25 @@ class Item extends BaseItem {
     public function setDescription($description)
     {
         $this->description = (string)$description;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLongDescription()
+    {
+        return $this->longDescription;
+    }
+
+    /**
+     * @param string $longDescription
+     * @return Item
+     */
+    public function setLongDescription($longDescription)
+    {
+        $this->longDescription = $longDescription;
 
         return $this;
     }

@@ -3,34 +3,34 @@
 {contentType xml}
 <ITEM>
     <ID n:if="$item->getItemId()">{$item->getItemId()}</ID>
+    <STAGE>draft</STAGE>
+    <CATEGORY_ID n:if="$item->getCategoryId()"><![CDATA[{$item->getCategoryId()}]]></CATEGORY_ID>
+    <BRAND_ID n:if="$item->getManufacturer()"><![CDATA[{$item->getManufacturer()}]]></BRAND_ID>
     <TITLE><![CDATA[{$item->getProductName()}]]></TITLE>
     <SHORTDESC><![CDATA[{$item->getDescription()|striptags|noescape}]]></SHORTDESC>
-    <URL>{$item->getUrl()}</URL>
-    <STAGE>draft</STAGE>
-
-    {if !empty($images = $item->getImages())}
-        {foreach $images as $image}
-            {var $tag = $iterator->first ? 'IMGURL' : 'IMGURL_ALTERNATIVE'}
-            <{$tag}>{$image->getUrl()}</{$tag}>
-        {/foreach}
-    {/if}
-
-    <CATEGORY_ID n:if="$item->getCategoryId()"><![CDATA[{$item->getCategoryId()}]]></CATEGORY_ID>
-
+    <LONGDESC><![CDATA[{$item->getLongDescription()|noescape}]]></LONGDESC>
+    <PRIORITY>1</PRIORITY>
+    <PACKAGE_SIZE>smallbox</PACKAGE_SIZE>
+    <BARCODE n:if="$item->getEan()">{$item->getEan()}</BARCODE>
     <PRICE>{$item->getPrice()}</PRICE>
     <VAT>{$item->getVat()}</VAT>
+    <URL>{$item->getUrl()}</URL>
 
     {if !empty($parameters = $item->getParameters())}
         <PARAM n:foreach="$parameters as $parameter">
-            <PARAM_NAME>{$parameter->getName()}</PARAM_NAME>
-            <VAL>{$parameter->getValue()}{$parameter->getUnit()}</VAL>
-            <PERCENTAGE n:if="$parameter->getPercentage()">{$parameter->getPercentage()}%</PERCENTAGE>
+        <NAME>{$parameter->getName()}</NAME>
+        <VALUE>{$parameter->getValue()}{$parameter->getUnit()}</VALUE>
         </PARAM>
     {/if}
 
-    <BRAND_ID n:if="$item->getManufacturer()"><![CDATA[{$item->getManufacturer()}]]></BRAND_ID>
-{*    <CATEGORYTEXT n:if="$item->getCategoryText()"><![CDATA[{$item->getCategoryText()}]]></CATEGORYTEXT>*}
-    <BARCODE n:if="$item->getEan()">{$item->getEan()}</BARCODE>
+    {if !empty($images = $item->getImages())}
+        {foreach $images as $image}
+            <MEDIA>
+                <URL>{$image->getUrl()}</URL>
+                <MAIN>{$iterator->first ? 'true' : 'false'}</MAIN>
+            </MEDIA>
+        {/foreach}
+    {/if}
 
 {*    <ITEMGROUP_ID n:if="$item->getItemGroupId()">{$item->getItemGroupId()}</ITEMGROUP_ID>*}
 {*    <ITEMGROUP_TITLE n:if="$item->getItemGroupTitle()">{$item->getItemGroupTitle()}</ITEMGROUP_TITLE>*}
