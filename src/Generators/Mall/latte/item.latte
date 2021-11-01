@@ -14,7 +14,6 @@
     <BARCODE n:if="$item->getEan()">{$item->getEan()}</BARCODE>
     <PRICE>{$item->getPrice()}</PRICE>
     <VAT>{$item->getVat()}</VAT>
-    <URL>{$item->getUrl()}</URL>
 
     {if !empty($parameters = $item->getParameters())}
         <PARAM n:foreach="$parameters as $parameter">
