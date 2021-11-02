@@ -4,14 +4,14 @@
 <ITEM>
     <ID n:if="$item->getItemId()">{$item->getItemId()}</ID>
     <STAGE>draft</STAGE>
-    <CATEGORY_ID n:if="$item->getCategoryId()">{$item->getCategoryId()}</CATEGORY_ID>
-    <BRAND_ID n:if="$item->getManufacturer()">{$item->getManufacturer()->getCode()}</BRAND_ID>
+    <CATEGORY_ID>{$item->getCategoryId()}</CATEGORY_ID>
+    <BRAND_ID>{$item->getManufacturer()|upper}</BRAND_ID>
     <TITLE>{$item->getProductName()}</TITLE>
     <SHORTDESC>{$item->getDescription()|striptags|truncate:300|noescape}</SHORTDESC>
     <LONGDESC>{$item->getLongDescription()|noescape}</LONGDESC>
     <PRIORITY>1</PRIORITY>
     <PACKAGE_SIZE>smallbox</PACKAGE_SIZE>
-    <BARCODE n:if="$item->getEan()">{$item->getEan()}</BARCODE>
+    <BARCODE>{$item->getEan()}</BARCODE>
     <PRICE>{$item->getPrice()}</PRICE>
     <VAT>{$item->getVat()}</VAT>
 
