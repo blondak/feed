@@ -8,7 +8,7 @@
     <BRAND_ID>{$item->getManufacturer()|upper}</BRAND_ID>
     <TITLE>{$item->getProductName()}</TITLE>
     <SHORTDESC>{$item->getDescription()|striptags|truncate:300|noescape}</SHORTDESC>
-    <LONGDESC>{$item->getLongDescription()|noescape}</LONGDESC>
+    <LONGDESC><![CDATA[{$item->getLongDescription()|noescape}]]></LONGDESC>
     <PRIORITY>1</PRIORITY>
     <PACKAGE_SIZE>smallbox</PACKAGE_SIZE>
     <BARCODE>{$item->getEan()}</BARCODE>
