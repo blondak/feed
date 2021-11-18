@@ -131,7 +131,7 @@ class Item extends BaseItem {
     }
 
     /** @var string */
-    protected $currency;
+    protected $currency = 'CZK';
 
     /** @var array */
     protected $features;
