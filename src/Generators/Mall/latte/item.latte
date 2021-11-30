@@ -7,7 +7,7 @@
     <CATEGORY_ID>{$item->getCategoryId()}</CATEGORY_ID>
     <BRAND_ID>{$item->getManufacturer()|upper}</BRAND_ID>
     <TITLE>{$item->getProductName()}</TITLE>
-    <SHORTDESC>{$item->getDescription()|striptags|truncate:300|noescape}</SHORTDESC>
+    <SHORTDESC><![CDATA[{$item->getDescription()|striptags|truncate:300|noescape}]]></SHORTDESC>
     <LONGDESC><![CDATA[{$item->getLongDescription()|noescape}]]></LONGDESC>
     <PRIORITY>1</PRIORITY>
     <PACKAGE_SIZE>smallbox</PACKAGE_SIZE>
