@@ -2,7 +2,7 @@
 
 {contentType xml}
 <SHOPITEM>
-    <PRODUCTNAME>{$item->getProductName()|noescape}</PRODUCTNAME>
+    <PRODUCTNAME><![CDATA[{$item->getProductName()|noescape}]]></PRODUCTNAME>
     <DESCRIPTION><![CDATA[{$item->getDescription()|striptags|noescape}]]></DESCRIPTION>
     <URL>{$item->getUrl()}</URL>
     <PRICE_VAT>{$item->getPriceVat()}</PRICE_VAT>
