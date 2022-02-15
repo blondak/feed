@@ -408,7 +408,7 @@ class Item extends BaseItem {
     }
 
     /**
-     * @return float
+     * @return string
      */
     public function getAvailability()
     {
@@ -416,7 +416,7 @@ class Item extends BaseItem {
     }
 
     /**
-     * @param float $availability
+     * @param string $availability
      * @return Item
      */
     public function setAvailability($availability)
