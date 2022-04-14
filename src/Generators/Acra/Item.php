@@ -2,7 +2,7 @@
 
 namespace Mk\Feed\Generators\Acra;
 
-use Mk, Nette;
+use Mk;
 use Mk\Feed\Generators\BaseItem;
 
 /**
@@ -11,7 +11,8 @@ use Mk\Feed\Generators\BaseItem;
  * @package Mk\Feed\Generators\Heureka
  * @see http://sluzby.heureka.cz/napoveda/xml-feed/ Documentation
  */
-class Item extends BaseItem {
+class Item extends BaseItem
+{
 
     /** @var string @required */
     protected $itemId;
@@ -73,6 +74,9 @@ class Item extends BaseItem {
     /** @var string|null */
     protected $metaDescription;
 
+    /** @var array */
+    protected $downloads = array();
+
     /**
      * @return string
      */
@@ -116,11 +120,11 @@ class Item extends BaseItem {
         return $this;
     }
 
-	/**
-	 * @param $name
-	 * @param null $id
-	 * @return $this
-	 */
+    /**
+     * @param $name
+     * @param null $id
+     * @return $this
+     */
     public function addGift($name, $id = null)
     {
         $this->gifts[] = new Gift($name, $id);
@@ -364,78 +368,74 @@ class Item extends BaseItem {
     /**
      * @return Parameter[]
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         return $this->parameters;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getCustomLabel(): ?string {
+    public function getCustomLabel(): ?string
+    {
         return $this->customLabel;
     }
 
-    /**
-     * @param string|null $customLabel
-     * @return Item
-     */
-    public function setCustomLabel( ?string $customLabel ): Item {
+    public function setCustomLabel(?string $customLabel): void
+    {
         $this->customLabel = $customLabel;
-        return $this;
     }
 
     /**
      * @return string[]
      */
-    public function getSpecialServices(): array {
-        return (array)$this->specialServices;
+    public function getSpecialServices(): array
+    {
+        return $this->specialServices;
     }
 
     /**
      * @param string[] $specialServices
      */
-    public function setSpecialServices( array $specialServices ): void {
+    public function setSpecialServices(array $specialServices): void
+    {
         $this->specialServices = $specialServices;
     }
 
-
-    public function addService( string $service ) {
-        if (count($this->specialServices) < 5){
+    public function addService(string $service): void
+    {
+        if (count($this->specialServices) < 5) {
             $this->specialServices[] = $service;
         }
     }
 
-    /**
-     * @return string|null
-     */
     public function getMetaTitle(): ?string
     {
         return $this->metaTitle;
     }
 
-    /**
-     * @param string|null $metaTitle
-     */
     public function setMetaTitle(?string $metaTitle): void
     {
         $this->metaTitle = $metaTitle;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMetaDescription(): ?string
     {
         return $this->metaDescription;
     }
 
-    /**
-     * @param string|null $metaDescription
-     */
     public function setMetaDescription(?string $metaDescription): void
     {
         $this->metaDescription = $metaDescription;
+    }
+
+    public function addDownload(string $url)
+    {
+        $this->downloads[] = $url;
+
+        return $this;
+    }
+
+    public function getDownloads(): array
+    {
+        return $this->downloads;
     }
 
 
