@@ -12,6 +12,8 @@ use Nette,
 
 class FeedCommand extends Command {
 
+    protected static $defaultName = 'Feed:export';
+
 	/** @var \Nette\DI\Container */
 	private $container;
 
@@ -28,7 +30,7 @@ class FeedCommand extends Command {
 
 	protected function configure()
 	{
-		$this->setName('Feed:export')
+		$this->setName(self::$defaultName)
 			->setDescription('Export product feed')
 			->addOption('show', 's', InputOption::VALUE_NONE, 'Print available exports')
 			->addOption('feed', 'f', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL);
