@@ -31,7 +31,7 @@
     <g:age_group>Adult</g:age_group>
     <g:color>Navy</g:color>
     <g:size>8 Standard</g:size>*}
-    <g:shipping n:if="$item->getShipping()">{$item->getShipping()}</g:shipping>
+    <g:shipping n:if="$item->getShipping()">{$item->getShipping()} {$item->getCurrency()}</g:shipping>
     <g:mpn>{if $item->getMpn()}{$item->getMpn()}{/if}</g:mpn>
 
     {if !empty($productTypes = $item->getProductTypes())}
