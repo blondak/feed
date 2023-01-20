@@ -38,6 +38,15 @@ class Item extends BaseItem
     /** @var float @required */
     protected $priceVat;
 
+    /** @var float */
+    protected $price;
+
+    /** @var int */
+    protected $vat;
+
+    /** @var float */
+    protected $priceWholesale;
+
     /** @var string|null */
     protected $itemType;
 
@@ -76,6 +85,8 @@ class Item extends BaseItem
 
     /** @var array */
     protected $downloads = array();
+
+
 
     /**
      * @return string
@@ -438,5 +449,34 @@ class Item extends BaseItem
         return $this->downloads;
     }
 
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): void
+    {
+        $this->price = $price;
+    }
+
+    public function getVat(): int
+    {
+        return $this->vat;
+    }
+
+    public function setVat(int $vat): void
+    {
+        $this->vat = $vat;
+    }
+
+    public function getPriceWholesale(): float
+    {
+        return $this->priceWholesale;
+    }
+
+    public function setPriceWholesale(float $priceWholesale): void
+    {
+        $this->priceWholesale = $priceWholesale;
+    }
 
 }

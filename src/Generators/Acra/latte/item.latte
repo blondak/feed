@@ -17,6 +17,18 @@
     <VIDEO_URL n:if="$item->getVideoUrl()">{$item->getVideoUrl()}</VIDEO_URL>
     <PRICE_VAT>{$item->getPriceVat()}</PRICE_VAT>
 
+    {if $item->getPrice()}
+        <PRICE_VAT>{$item->getPrice()}</PRICE_VAT>
+    {/if}
+
+    {if $item->getPriceWholesale()}
+        <PRICE_WHOLESALE>{$item->getPriceWholesale()}</PRICE_WHOLESALE>
+    {/if}
+
+    {if $item->getVat()}
+        <VAT>{$item->getVat()}</VAT>
+    {/if}
+
     {if !empty($parameters = $item->getParameters())}
         <PARAM n:foreach="$parameters as $parameter">
             <PARAM_NAME>{$parameter->getName()}</PARAM_NAME>
