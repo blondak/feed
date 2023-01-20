@@ -38,13 +38,13 @@ class Item extends BaseItem
     /** @var float @required */
     protected $priceVat;
 
-    /** @var float */
+    /** @var float|null */
     protected $price;
 
-    /** @var int */
+    /** @var int|null */
     protected $vat;
 
-    /** @var float */
+    /** @var float|null */
     protected $priceWholesale;
 
     /** @var string|null */
@@ -449,7 +449,7 @@ class Item extends BaseItem
         return $this->downloads;
     }
 
-    public function getPrice(): float
+    public function getPrice(): ?float
     {
         return $this->price;
     }
@@ -459,7 +459,7 @@ class Item extends BaseItem
         $this->price = $price;
     }
 
-    public function getVat(): int
+    public function getVat(): ?int
     {
         return $this->vat;
     }
@@ -469,7 +469,7 @@ class Item extends BaseItem
         $this->vat = $vat;
     }
 
-    public function getPriceWholesale(): float
+    public function getPriceWholesale(): ?float
     {
         return $this->priceWholesale;
     }
