@@ -118,17 +118,11 @@ class Item extends BaseItem {
     /** @var string|null */
     protected $shipping;
 
-    public function getShipping(): ?string
-    {
-        return $this->shipping;
-    }
+    /** @var string|null */
+    protected $shippingService;
 
-    public function setShipping(?string $shipping): Item
-    {
-        $this->shipping = $shipping;
-
-        return $this;
-    }
+    /** @var string|null */
+    protected $shippingCountry;
 
     /** @var string */
     protected $currency = 'CZK';
@@ -154,6 +148,42 @@ class Item extends BaseItem {
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getShipping(): ?string
+    {
+        return $this->shipping;
+    }
+
+    public function setShipping(?string $shipping): Item
+    {
+        $this->shipping = $shipping;
+
+        return $this;
+    }
+
+    public function getShippingService(): ?string
+    {
+        return $this->shippingService;
+    }
+
+    public function setShippingService(?string $shippingService): Item
+    {
+        $this->shippingService = $shippingService;
+
+        return $this;
+    }
+
+    public function getShippingCountry(): ?string
+    {
+        return $this->shippingCountry;
+    }
+
+    public function setShippingCountry(?string $shippingCountry): Item
+    {
+        $this->shippingCountry = $shippingCountry;
 
         return $this;
     }
