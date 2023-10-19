@@ -133,6 +133,9 @@ class Item extends BaseItem {
     /** @var array */
     protected $parts;
 
+    /** @var array */
+    protected $attributes = [];
+
     /**
      * @return string
      */
@@ -631,13 +634,18 @@ class Item extends BaseItem {
         $this->ownLabels = $ownLabels;
     }
 
-
-
     public function addOwnLabel($label)
     {
         $this->ownLabels[] = $label;
     }
 
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
 
-
+    public function addAttribute($name, $value): void
+    {
+        $this->attributes[$name] = $value;
+    }
 }

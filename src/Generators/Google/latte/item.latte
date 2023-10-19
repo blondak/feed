@@ -59,6 +59,13 @@
         </g:features>
     {/if}
 
+    {if !empty($attributes = $item->getAttributes())}
+        <g:product_detail n:foreach="$attributes as $attributeName => $attributeValue">
+            <g:attribute_name>{$attributeName}</g:attribute_name>
+            <g:attribute_value>{$attributeValue}</g:attribute_value>
+        </g:product_detail>
+    {/if}
+
     {if !empty($parts = $item->getParts())}
         <g:parts n:inner-foreach="$parts as $part">
             <g:part>{trim($part)}</g:part>
