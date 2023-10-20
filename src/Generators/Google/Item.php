@@ -136,6 +136,9 @@ class Item extends BaseItem {
     /** @var array */
     protected $attributes = [];
 
+    /** @var Shipping[] */
+    protected $deliveries = [];
+
     /**
      * @return string
      */
@@ -647,5 +650,15 @@ class Item extends BaseItem {
     public function addAttribute($name, $value): void
     {
         $this->attributes[$name] = $value;
+    }
+
+    public function addDelivery(Shipping $delivery): void
+    {
+        $this->deliveries[] = $delivery;
+    }
+
+    public function getDeliveries(): array
+    {
+        return $this->deliveries;
     }
 }

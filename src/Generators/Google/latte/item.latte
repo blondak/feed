@@ -36,6 +36,15 @@
       <g:service>{$item->getShippingService()}</g:service>
       <g:price>{$item->getShipping()} {$item->getCurrency()}</g:price>
     </g:shipping>
+
+    {foreach $item->getDeliveries() as $delivery}
+        <g:shipping>
+            <g:country>{$delivery->getCountry()}</g:country>
+            <g:service>{$delivery->getName()}</g:service>
+            <g:price>{$delivery->getPrice()} {$delivery->getCurrency()}</g:price>
+        </g:shipping>
+    {/foreach}
+
     <g:mpn>{if $item->getMpn()}{$item->getMpn()}{/if}</g:mpn>
 
     {if !empty($productTypes = $item->getProductTypes())}
