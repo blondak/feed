@@ -4,7 +4,7 @@
     <ITEM_ID n:if="$item->getItemId()">{$item->getItemId()}</ITEM_ID>
     <PRODUCTNAME><![CDATA[{$item->getProductName()|noescape}]]></PRODUCTNAME>
     <PRODUCT n:if="$item->getProduct()"><![CDATA[{$item->getProduct()|noescape}]]></PRODUCT>
-    <DESCRIPTION><![CDATA[{htmlspecialchars($item->getDescription())}]]></DESCRIPTION>
+    <DESCRIPTION><![CDATA[{$item->getDescription()}]]></DESCRIPTION>
     <URL>{$item->getUrl()}</URL>
 
     {if !empty($images = $item->getImages())}
