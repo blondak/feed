@@ -41,7 +41,8 @@ class Delivery{
         VLASTNI_PREPRAVA = 'VLASTNI_PREPRAVA',
         ZASILKOVNA = 'ZASILKOVNA',
         BALIKOVNA_DEPOTAPI = 'BALIKOVNA_DEPOTAPI',
-        SLOVENSKA_POSTA = 'SLOVENSKA_POSTA';
+        SLOVENSKA_POSTA = 'SLOVENSKA_POSTA',
+        PPL_PARCELSHOP = 'PPL_PARCELSHOP';
 
 
     static $ids = array(
@@ -74,6 +75,7 @@ class Delivery{
         self::BALIKOVNA_DEPOTAPI,
 
         self::SLOVENSKA_POSTA,
+        self::PPL_PARCELSHOP
     );
 
     /** @var string */
