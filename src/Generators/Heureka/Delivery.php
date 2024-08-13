@@ -93,9 +93,6 @@ class Delivery{
      */
     public function __construct($id, $price, $priceCod = null)
     {
-        if (!in_array($id, self::$ids)) {
-            throw new \InvalidArgumentException("Delivery with id $id doesn\t exist");
-        }
         $this->id = (string) $id;
         $this->price = (float) $price;
         $this->priceCod = isset($priceCod) ? (float) $priceCod : null;
