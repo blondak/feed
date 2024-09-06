@@ -62,6 +62,6 @@
     <CONDITION_DESC n:if="$item->getItemTypeDesc()">{$item->getItemTypeDesc()}</CONDITION_DESC>
 
     <PRODUCT_LINE n:if="$item->getProductLine()">{$item->getProductLine()}</PRODUCT_LINE>
-    <LIST_PRICE n:if="$item->getListPrice()">{$item->getListPrice()}</LIST_PRICE>
+    <PRICE_BEFORE_DISCOUNT n:if="$item->getListPrice()">{$item->getListPrice()}</PRICE_BEFORE_DISCOUNT>
     <RELEASE_DATE n:if="$item->getReleaseDate()">{$item->getReleaseDate()|date:'c'}</RELEASE_DATE>
 </SHOPITEM>
