@@ -25,7 +25,7 @@
     {/if}
 
     <MANUFACTURER n:if="$item->getManufacturer()"><![CDATA[{$item->getManufacturer()}]]></MANUFACTURER>
-    <CATEGORYTEXT n:if="$item->getCategoryText()"><![CDATA[{$item->getCategoryText()}]]></CATEGORYTEXT>
+    <CATEGORYTEXT n:if="$item->getCategoryText()"><![CDATA[{$item->getCategoryText()|noescape}]]></CATEGORYTEXT>
     <EAN n:if="$item->getEan()">{$item->getEan()}</EAN>
     <ISBN n:if="$item->getIsbn()">{$item->getIsbn()}</ISBN>
     <HEUREKA_CPC n:if="isset($item->heurekaCpc) && $item->getHeurekaCpc()>0">{$item->getHeurekaCpc()}</HEUREKA_CPC>
