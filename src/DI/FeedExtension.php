@@ -34,11 +34,5 @@ class FeedExtension extends Nette\DI\CompilerExtension {
                 ->setFactory($class);
 
         }
-
-        if (class_exists('\Symfony\Component\Console\Command\Command')) {
-            $builder->addDefinition($this->prefix('command'))
-                ->setFactory('Mk\Feed\Command\FeedCommand', array($config))
-                ->addTag('kdyby.console.command');
-        }
     }
 }
