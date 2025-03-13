@@ -57,6 +57,9 @@ class Item extends BaseItem
     protected $manufacturer;
 
     /** @var string|null */
+    protected $supplier;
+
+    /** @var string|null */
     protected $categoryText;
 
     /** @var string|null */
@@ -310,6 +313,25 @@ class Item extends BaseItem
     public function setManufacturer($manufacturer)
     {
         $this->manufacturer = $manufacturer;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getSupplier()
+    {
+        return $this->supplier;
+    }
+
+    /**
+     * @param null|string $supplier
+     * @return Item
+     */
+    public function setSupplier($supplier)
+    {
+        $this->supplier = $supplier;
 
         return $this;
     }

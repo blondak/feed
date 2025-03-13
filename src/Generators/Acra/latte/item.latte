@@ -38,6 +38,7 @@
     {/if}
 
     <MANUFACTURER n:if="$item->getManufacturer()"><![CDATA[{$item->getManufacturer()}]]></MANUFACTURER>
+    <SUPPLIER n:if="$item->getSupplier()"><![CDATA[{$item->getSupplier()}]]></SUPPLIER>
     <CATEGORYTEXT n:if="$item->getCategoryText()"><![CDATA[{$item->getCategoryText()}]]></CATEGORYTEXT>
     <EAN n:if="$item->getEan()">{$item->getEan()}</EAN>
 
