@@ -5,6 +5,7 @@
     <PRODUCTNAME><![CDATA[{$item->getProductName()|noescape}]]></PRODUCTNAME>
     <PRODUCT n:if="$item->getProduct()"><![CDATA[{$item->getProduct()|noescape}]]></PRODUCT>
     <DESCRIPTION><![CDATA[{$item->getDescription()}]]></DESCRIPTION>
+    <SHORT_DESCRIPTION n:if="$item->getShortDescription()"><![CDATA[{$item->getShortDescription()}]]></SHORT_DESCRIPTION>
     <URL>{$item->getUrl()}</URL>
 
     {if !empty($images = $item->getImages())}
