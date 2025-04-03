@@ -92,7 +92,8 @@ class Item extends BaseItem
     /** @var array */
     protected $downloads = array();
 
-
+    /** @var array */
+    protected $gpsrs = array();
 
     /**
      * @return string
@@ -486,6 +487,16 @@ class Item extends BaseItem
     public function getDownloads(): array
     {
         return $this->downloads;
+    }
+
+    public function addGpsr(string $url): void
+    {
+        $this->gpsrs[] = $url;
+    }
+
+    public function getGpsrs(): array
+    {
+        return $this->gpsrs;
     }
 
     public function getPrice(): ?float

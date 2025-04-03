@@ -56,5 +56,8 @@
         <DOWNLOAD n:foreach="$downloads as $url">{$url}</DOWNLOAD>
     {/if}
 
+    {if !empty($gpsrs = $item->getGpsrs())}
+        <GPSR n:foreach="$gpsrs as $url">{$url}</GPSR>
+    {/if}
 
 </SHOPITEM>
