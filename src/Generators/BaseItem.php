@@ -19,19 +19,18 @@ abstract class BaseItem implements Mk\Feed\Generators\IItem
 	 * Validate item
 	 * @return bool return true if item is valid
      */
-	public function validate() {
+    public function validate() {
+        $reflection = new \ReflectionClass(get_called_class());
 
-		$reflection = new Nette\Reflection\ClassType(get_called_class());
+        foreach ($reflection->getProperties(\ReflectionProperty::IS_PUBLIC) as $v) {
+            $docComment = $v->getDocComment();
+            if ($docComment && preg_match('/@required\b/', $docComment)) {
+                if (!isset($this->{$v->getName()})) {
+                    return FALSE;
+                }
+            }
+        }
 
-		foreach ($reflection->getProperties(\ReflectionProperty::IS_PUBLIC) as $v) {
-			if ($v->getAnnotation('required')) {
-				if (!isset($this->{$v->getName()})) {
-					return FALSE;
-				}
-			}
-		}
-
-		return TRUE;
-	}
-
+        return TRUE;
+    }
 }
