@@ -393,7 +393,7 @@ class Item extends BaseItem {
      * @param \DateTime|null $availabilityDate
      * @return Item
      */
-    public function setAvailabilityDate(\DateTime $availabilityDate = null)
+    public function setAvailabilityDate(?\DateTime $availabilityDate = null)
     {
         $this->availabilityDate = $availabilityDate;
 
