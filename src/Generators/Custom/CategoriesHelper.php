@@ -12,7 +12,7 @@ class CategoriesHelper {
     /** @var \Nette\Caching\Cache */
     private $cache;
 
-    function __construct(IStorage $storage = null)
+    function __construct(?IStorage $storage = null)
     {
         if ($storage) {
             $this->cache = new Cache($storage, __CLASS__);
